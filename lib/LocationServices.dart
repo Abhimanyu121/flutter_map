@@ -1,6 +1,6 @@
 import 'package:location/location.dart';
 class LocationServices {
-  Future<Map<String,double>> currentLocation () async{
+  Future<Map<String,double>>CurrentLocation () async{
     var currentLocation = <String, double>{};
     var location = new Location();
     try{
@@ -9,6 +9,7 @@ class LocationServices {
     catch (e) {
       currentLocation = null;
     }
+    return currentLocation;
 
   }
 }
