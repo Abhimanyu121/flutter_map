@@ -3,21 +3,22 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'LocationServices.dart';
 
 class Mapui extends StatefulWidget{
- // Mapui(Map mp){
-  //  current_loc = mp;
- // }
+  Mapui(Map mp){
+    current_loc = mp;
+  }
   var current_loc = <String, double>{};
   @override
-  _MapuiState createState() => _MapuiState();
+  _MapuiState createState() => _MapuiState(current_loc);
 }
 class _MapuiState extends State<Mapui>{
- // _MapuiState(Map mp){
- //   current_loc = mp;
- // }
+  _MapuiState(Map mp){
+    current_loc = mp;
+    _center =   LatLng(current_loc["latitude"],current_loc["longitude"]);
+  }
 
   GoogleMapController mapController;
   var current_loc = <String, double>{};
-  LatLng _center = const LatLng(45.521563,-122.677433);
+  LatLng _center ;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -39,9 +40,6 @@ class _MapuiState extends State<Mapui>{
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
-  Future <Map<String,double>>getloc() async {
-    LocationServices ls = new LocationServices();
-    return await ls.CurrentLocation();
-  }
+
 
 }
