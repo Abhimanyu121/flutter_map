@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'Roundedbutton.dart';
 class register_ui extends StatelessWidget{
-
-  BuildContext cx;
-  String userName;
-  String email;
-  String password;
+  var cont= TextEditingController();
+  var cx= TextEditingController();
+  var userName= TextEditingController();
+  var email= TextEditingController();
+  var password= TextEditingController();
   bool pool;
-  String ph_no;
+  var ph_no= TextEditingController();
 
   @override
 
@@ -16,7 +16,7 @@ class register_ui extends StatelessWidget{
     //final Size screenSize = MediaQuery.of(context).size;
 
       _register() async {
-       await  _register_event(email, ph_no,userName, pool, password);
+       await  _register_event();
       }
 
     // TODO: implement build
@@ -37,7 +37,7 @@ class register_ui extends StatelessWidget{
                           labelText: 'Name',
                           icon: new Icon(Icons.person),
                         ),
-                        onSaved : (String value) {userName = value;},
+                        controller: userName,
                       ),
                       padding: const EdgeInsets.only( bottom:15.0, top:0.0,right: 20.0 ),
                     ),
@@ -48,7 +48,7 @@ class register_ui extends StatelessWidget{
                             hintText: 'EmailID',
                             labelText: 'EmailID',
                           ),
-                          onSaved: (String value) { email = value; },
+                          controller: email,
                         ),
                         padding: const EdgeInsets.only( bottom:15.0, top:0.0,right: 20.0 ),
                       ),
@@ -61,7 +61,7 @@ class register_ui extends StatelessWidget{
                             hintText: 'Phone number',
                             labelText: 'Phone Number',
                           ),
-                          onSaved: (String value) { ph_no = value; },
+                          controller: ph_no,
                         ),
                         padding: const EdgeInsets.only( bottom:15.0, top:0.0,right: 20.0 ),
                       ),
@@ -75,8 +75,7 @@ class register_ui extends StatelessWidget{
                             labelText: 'Password *',
                           ),
                           obscureText: true,
-                          onSaved: (String value) { password=value;
-                          },
+                          controller : password,
                         ),
                         padding: const EdgeInsets.only( bottom:15.0, top:0.0,right: 20.0 ),
                       ),
@@ -128,13 +127,13 @@ class register_ui extends StatelessWidget{
 
   }
   Firestore db = Firestore.instance;
-  Future<void> _register_event(String email, String ph_no , String name, bool pool, String pass) async{
+  Future<void> _register_event() async{
     TransactionHandler createTransaction = (Transaction tx ) async{
-      DocumentSnapshot ds = await tx.get(db.collection('users').document(email));
+      DocumentSnapshot ds = await tx.get(db.collection('users').document(email.text));
       var dataMap =new Map<String, String>();
-      dataMap['name']= name;
-      dataMap['pass']=pass;
-      dataMap['ph_no']=ph_no;
+      dataMap['name']= userName.text;
+      dataMap['pass']=cont.text;
+      dataMap['ph_no']=ph_no.text;
       dataMap['pool']=pool.toString();
       await tx.set(ds.reference, dataMap);
 
