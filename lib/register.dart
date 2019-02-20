@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'Roundedbutton.dart';
 class register_ui extends StatelessWidget{
   var cont= TextEditingController();
   var cx= TextEditingController();
@@ -107,14 +106,9 @@ class register_ui extends StatelessWidget{
                         )
                     ),
                     new Container(
-                        child: new RoundedButton (
-                          buttonName: 'Sign-up',
-                          onTap:  _register,
-                          width: 60.0,
-                          height: 50.0,
-                          bottomMargin: 10.0,
-                          borderWidth: 0.0,
-                          buttonColor: Colors.transparent,
+                        child: new RaisedButton (
+                          child: Text('Sign-up'),
+                          onPressed:  _register
                         )
                     )
                     ,

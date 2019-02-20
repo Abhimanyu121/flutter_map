@@ -27,12 +27,28 @@ class _MapuiState extends State<Mapui>{
         appBar: AppBar(
           title: Text("Magicarp"),
         ),
-        body: GoogleMap(
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: _center,
-            zoom: 11.0,
-          ),
+        body: Stack(
+          children: <Widget>[
+            GoogleMap(
+              onMapCreated: _onMapCreated,
+              initialCameraPosition: CameraPosition(
+                target: _center,
+                zoom: 11.0,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: FloatingActionButton(
+                  onPressed: () => print('button pressed'),
+                  materialTapTargetSize: MaterialTapTargetSize.padded,
+                  backgroundColor: Colors.green,
+                  child: const Icon(Icons.map, size: 36.0),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
