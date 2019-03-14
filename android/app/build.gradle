@@ -49,6 +49,9 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    packagingOptions{
+        exclude 'androidsupportmultidexversion.txt'
+    }
 }
 
 flutter {
@@ -62,4 +65,5 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
 }
+
 apply plugin: 'com.google.gms.google-services'
