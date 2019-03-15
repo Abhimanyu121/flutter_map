@@ -93,18 +93,7 @@ class register_ui extends StatelessWidget{
                       ),
                       padding: const EdgeInsets.only(top:10.0),
                     ),
-                    new Container(
-                        child : new Text("Do you have vehicle to pool?")
-                    ),
-                    new Container(
-                        child: new Checkbox(
-                          value : false,
-                          tristate: false,
-                          onChanged: (bool value){
-                            pool = value;
-                          },
-                        )
-                    ),
+
                     new Container(
                         child: new RaisedButton (
                           child: Text('Sign-up'),
@@ -123,6 +112,7 @@ class register_ui extends StatelessWidget{
   Firestore db = Firestore.instance;
   Future<void> _register_event() async{
     TransactionHandler createTransaction = (Transaction tx ) async{
+      //DocumentSnapshot ds = await tx.get(db.collection('users').document(email.text));
       DocumentSnapshot ds = await tx.get(db.collection('users').document(email.text));
       var dataMap =new Map<String, String>();
       dataMap['name']= userName.text;
