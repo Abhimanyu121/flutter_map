@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 class register_ui extends StatelessWidget{
-  var cont= TextEditingController();
-  var cx= TextEditingController();
-  var userName= TextEditingController();
-  var email= TextEditingController();
-  var password= TextEditingController();
+  var cont= new TextEditingController();
+  var cx= new TextEditingController();
+  var userName= new TextEditingController();
+  var email= new TextEditingController();
+  var password= new TextEditingController();
   bool pool;
-  var ph_no= TextEditingController();
+  var ph_no= new TextEditingController();
 
   @override
 
@@ -111,6 +111,17 @@ class register_ui extends StatelessWidget{
   }
   Firestore db = Firestore.instance;
   Future<void> _register_event() async{
+    final docref = db.collection("users");
+    var dataMap =new Map<String, String>();
+    dataMap['name']= userName.text;
+    dataMap['pass']=password.text;
+    dataMap['ph_no']=ph_no.text;
+    dataMap['pool']=pool.toString();
+    docref.document().setData(dataMap).then((doc){}).catchError((error){
+      print(error);
+    });
+  }
+  /**Future<void> _register_event() async{
     TransactionHandler createTransaction = (Transaction tx ) async{
       //DocumentSnapshot ds = await tx.get(db.collection('users').document(email.text));
       DocumentSnapshot ds = await tx.get(db.collection('users').document(email.text));
@@ -130,5 +141,5 @@ class register_ui extends StatelessWidget{
       print('error: $error');
       return null;
     });
-  }
+  } */
 }
