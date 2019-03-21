@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 class signin_ui extends StatelessWidget{
+  var db =  Firestore.instance;
   var email = TextEditingController();
   var pass = TextEditingController();
   @override
@@ -54,7 +55,11 @@ class signin_ui extends StatelessWidget{
     );
   }
   Future<void> _signin ()async {
-    
+    db.collection("users").where("email", isEqualTo: email.text).snapshots().listen((data) => data.documents.forEach((doc){
+      if(doc["pass"] == pass.text){
+        
+      }
+    }));
   }
 
 

@@ -116,7 +116,7 @@ class register_ui extends StatelessWidget{
     dataMap['name']= userName.text;
     dataMap['pass']=password.text;
     dataMap['ph_no']=ph_no.text;
-    dataMap['pool']=pool.toString();
+    dataMap['email']=email.text;
     docref.document().setData(dataMap).then((doc){}).catchError((error){
       print(error);
     });
