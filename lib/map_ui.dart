@@ -3,9 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 //import 'LocationServices.dart';
 
 class Mapui extends StatefulWidget{
-  Mapui(Map mp){
-    current_loc = mp;
-  }
+
   var current_loc = <String, double>{};
   @override
   _MapuiState createState() => _MapuiState(current_loc);

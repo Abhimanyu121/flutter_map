@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'map_ui.dart';
 class signin_ui extends StatelessWidget{
   var db =  Firestore.instance;
   var email = TextEditingController();
@@ -54,10 +56,16 @@ class signin_ui extends StatelessWidget{
       ),
     );
   }
-  Future<void> _signin ()async {
-    db.collection("users").where("email", isEqualTo: email.text).snapshots().listen((data) => data.documents.forEach((doc){
+  Future<void> _signin (BuildContext context )async {
+    db.collection("users").where("email", isEqualTo: email.text).snapshots().listen((data) => data.documents.forEach((doc) async {
       if(doc["pass"] == pass.text){
-        
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('status',true);
+        await prefs.setString("name",doc["name"]);
+        await prefs.setString("email", doc["email"]);
+        Navigator.push(context, 
+        MaterialPageRoute(builder: (context)=> Mapui()));
+
       }
     }));
   }
