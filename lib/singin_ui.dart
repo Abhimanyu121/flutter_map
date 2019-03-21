@@ -10,10 +10,10 @@ class signin_ui extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      home : _scaffold(),
+        home : _scaffold(context),
     );
   }
-  Scaffold _scaffold (){
+  Scaffold _scaffold (BuildContext context){
     return new Scaffold(
       appBar: AppBar(
         title: Text("Sign in "),
@@ -46,7 +46,7 @@ class signin_ui extends StatelessWidget{
                 ),
                 new Container(
                   child: new RaisedButton(
-                      onPressed: null,
+                      onPressed:  _sign_in(context),
                       child: Text("Sign-In"),
                   ),
                 )
@@ -68,6 +68,9 @@ class signin_ui extends StatelessWidget{
 
       }
     }));
+  }
+  _sign_in(BuildContext context) async{
+    await _signin(context);
   }
 
 

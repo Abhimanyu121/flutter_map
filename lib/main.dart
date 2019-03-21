@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'map_ui.dart';
+//import 'map_ui.dart';
 import 'LocationServices.dart';
-import 'register.dart';
+//import 'register.dart';
+import 'singin_ui.dart';
 
 void main()  {
   var current_loc = <String, double>{};
@@ -9,7 +10,7 @@ void main()  {
   print(getloc());
   current_loc = {"latitude":42.152, "longitude":12.65};
   //runApp(Mapui(current_loc));
-  runApp(register_ui());
+  runApp(signin_ui());
 }
 Map<String,double> getloc()  {
   LocationServices ls = new LocationServices();
